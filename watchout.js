@@ -176,10 +176,24 @@ var makePlayer = function(target){
 
 };
 
-var movePlayer = function(player, target){
+var movePlayerToNode = function(player, target){
   player.attr("transform", "translate(" + target.y + ")");
 };
 
+var tryMove = function(player, target){
+  console.log(target)
+  console.log('target x', target.x);
+  console.log('target y',target.y);
+  player.attr("transform", "translate(" + target.y + ")");
+  return player;
+};
+
+var mouseClickToMove = function(){
+
+}
+
+
+// Start schim code
 
 var nodes = tree.nodes(jsonThing),
     links = tree.links(nodes);
@@ -196,14 +210,23 @@ var link = svg.selectAll(".link")
   .enter().append("path")
     .attr("class", "link")
     .attr("d", diagonal);
-
+window.player;
 
 var node = svg.selectAll(".node")
   .data(nodes)
   .enter().append("g")
     .attr("class", "node")
-    .attr("transform", function(d) { return "rotate(" + (d.x) + ")translate(" + d.y + ")"; });
+    .attr("transform", function(d) { return "rotate(" + (d.x) + ")translate(" + d.y + ")"; })
+    .on("click", function (obj,index){
+      console.log('obj ', obj, 'index ', index, 'dom element ',this);
+      console.log(obj.y);
+     tryMove(window.player, obj);
 
+    });
+
+// create player
+var g = d3.select("g");
+window.player = makePlayer(g);
 
 
 node.append("circle")
