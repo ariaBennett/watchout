@@ -24,3 +24,9 @@ body {
   stroke: #ccc;
   stroke-width: 5px;
 }
+
+.player {
+  fill: black;
+  stroke: red;
+  stroke-width: 1.5;
+}

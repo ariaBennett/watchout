@@ -76,9 +76,9 @@ var jsonThing = {
         {
           "name": "floor 1 help 3",
           "children": [
-            {"name": "JoshuaGoldberg", "size": 7074},
-            {"name": "JonathanTewksbury", "size": 7074},
-            {"name": "FaridSiddiqi", "size": 7074}
+            {"name": "JoshuaGoldberg"},
+            {"name": "JonathanTewksbury"},
+            {"name": "FaridSiddiqi"}
           ]
         }
       ]
@@ -89,26 +89,26 @@ var jsonThing = {
         {
           "name": "floor 2 help 1",
           "children": [
-              {"name": "EricCraft", "size": 1983},
-              {"name": "AlbertLee​", "size": 1375},
-              {"name": "ChrisOliver", "size": 8746}
+              {"name": "EricCraft"},
+              {"name": "AlbertLee​"},
+              {"name": "ChrisOliver"}
 
             ]
           },
           {"name": "floor 2 help 2",
           "children": [
-              {"name": "MarkChatkha", "size": 1983},
-              {"name": "JPWhitaker​", "size": 1375},
-              {"name": "AdnanWahab​", "size": 8746}
+              {"name": "MarkChatkha"},
+              {"name": "JPWhitaker​"},
+              {"name": "AdnanWahab​"}
 
             ]
           },
 
             {"name": "floor 2 help 3",
           "children": [
-              {"name": "ChristenThompson​", "size": 1983},
-              {"name": "EmilyCoco", "size": 2047},
-              {"name": "ChrisOliver", "size": 8746}
+              {"name": "ChristenThompson​"},
+              {"name": "EmilyCoco"},
+              {"name": "ChrisOliver"}
 
             ]
           },
@@ -120,24 +120,24 @@ var jsonThing = {
             {
               "name": "floor 3 help 1",
               "children": [
-                {"name": "CharlesTai", "size": 721},
-                {"name": "AlexJacobs", "size": 4294},
-                {"name": "AddisonLee", "size": 1314}
+                {"name": "CharlesTai"},
+                {"name": "AlexJacobs"},
+                {"name": "AddisonLee"}
               ]
             },
             {"name": "floor 3 help 2",
           "children": [
-              {"name": "AdrianKim", "size": 9800},
-              {"name": "ElliottThoreby", "size": 1375},
-              {"name": "MeganTulac​", "size": 2047}
+              {"name": "AdrianKim"},
+              {"name": "ElliottThoreby"},
+              {"name": "MeganTulac​"}
 
             ]
            },
             {"name": "floor 3 help 3",
           "children": [
-              {"name": "HenryZhu​", "size": 2047},
-              {"name": "MariusFarioletti", "size": 7840},
-              {"name": "ShaneKeller", "size": 6714}
+              {"name": "HenryZhu​"},
+              {"name": "MariusFarioletti"},
+              {"name": "ShaneKeller"}
             ]
         },
           ]
@@ -147,31 +147,45 @@ var jsonThing = {
           "children": [
             {"name": "floor 4 help 1",
             "children": [
-              {"name": "NathanHoule​", "size": 7074},
-              {"name": "SherahSmith​", "size": 7074},
-              {"name": "IanLyons", "size": 7074}
+              {"name": "NathanHoule​"},
+              {"name": "SherahSmith​"},
+              {"name": "IanLyons"}
             ]},
-            {"name": "floor 4 help 2", "size": 1732,
+            {"name": "floor 4 help 2",
             "children": [
-              {"name": "TimSchiller​", "size": 7074},
-              {"name": "MarkReveley​", "size": 7074},
-              {"name": "JunJung", "size": 7074}
+              {"name": "TimSchiller​"},
+              {"name": "MarkReveley​"},
+              {"name": "JunJung"}
             ]},
-            {"name": "floor 4 help 3", "size": 3623,
+            {"name": "floor 4 help 3",
             "children": [
-              {"name": "MarkRossetti​", "size": 7074},
-              {"name": "IanLyons", "size": 7074},
-              {"name": "HenryZhu​", "size": 7074}
+              {"name": "MarkRossetti​"},
+              {"name": "IanLyons"},
+              {"name": "HenryZhu​"}
 
             ]}
           ]
         },
       ]
     };
+var makePlayer = function(target){
+
+  var player = target.append("circle").attr("r", "8").attr("class", "player");
+  player.occupies = target;
+  return player;
+
+};
+
+var movePlayer = function(player, target){
+  player.attr("transform", "translate(" + target.y + ")");
+};
 
 
 var nodes = tree.nodes(jsonThing),
     links = tree.links(nodes);
+    window.testTree = tree;
+    window.testNodes = nodes;
+    window.testLinks = links;
 
 for (var i = 0; i < nodes.length; i++) {
   nodes[i].x = nodes[i].x + 135;
