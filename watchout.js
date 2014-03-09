@@ -268,7 +268,7 @@ window.submitRequest = function(source){
     };
     var d3source = d3.selectAll(".node").filter(function(thing){
       if (thing.name === source.name){
-        return thing[0][0];
+        return thing;
       }
     });
     console.log(d3source);
