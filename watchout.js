@@ -261,10 +261,34 @@ window.students = (function(){
 
 
 window.submitRequest = function(source){
-  window.activeRequests[source.name] = {
-    timeSent: Date.now(),
-    node: source
-  };
+  if (window.activeRequests[source.name]===undefined){
+    window.activeRequests[source.name] = {
+      timeSent: Date.now(),
+      node: source
+    };
+    var d3source = d3.selectAll(".node").filter(function(thing){
+      if (thing.name === source.name){
+        return thing[0][0];
+      }
+    });
+    console.log(d3source);
+    d3source.classed("circle", false);
+    d3source.classed("infected", true);
+  }
 };
 
+window.generateRequest = function(){
+  var leng = window.students.length;
+  var randomStudentIndex = Math.floor(d3.random.irwinHall(1)() * leng);
+  window.submitRequest(students[randomStudentIndex]);
+};
 
+window.addSpawner = function(delay){
+  setInterval(function(){
+    console.log("hi");
+    window.generateRequest();
+  }, (delay*d3.random.irwinHall(1)()));
+};
+
+// init
+window.addSpawner(1000 * 10);

@@ -26,7 +26,13 @@ body {
 }
 
 .player {
-  fill: black;
-  stroke: red;
+  fill: green;
+  stroke: blue;
+  stroke-width: 1.5;
+}
+
+.infected {
+  fill: red;
+  stroke: orange;
   stroke-width: 1.5;
 }
