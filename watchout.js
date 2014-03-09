@@ -90,7 +90,7 @@ var jsonThing = {
           "name": "floor 2 help 1",
           "children": [
               {"name": "EricCraft"},
-              {"name": "AlbertLee​"},
+              {"name": "AlbertLee"},
               {"name": "ChrisOliver"}
 
             ]
@@ -98,15 +98,15 @@ var jsonThing = {
           {"name": "floor 2 help 2",
           "children": [
               {"name": "MarkChatkha"},
-              {"name": "JPWhitaker​"},
-              {"name": "AdnanWahab​"}
+              {"name": "JPWhitaker"},
+              {"name": "AdnanWahab"}
 
             ]
           },
 
             {"name": "floor 2 help 3",
           "children": [
-              {"name": "ChristenThompson​"},
+              {"name": "ChristenThompson"},
               {"name": "EmilyCoco"},
               {"name": "ChrisOliver"}
 
@@ -129,13 +129,13 @@ var jsonThing = {
           "children": [
               {"name": "AdrianKim"},
               {"name": "ElliottThoreby"},
-              {"name": "MeganTulac​"}
+              {"name": "MeganTulac"}
 
             ]
            },
             {"name": "floor 3 help 3",
           "children": [
-              {"name": "HenryZhu​"},
+              {"name": "HenryZhu"},
               {"name": "MariusFarioletti"},
               {"name": "ShaneKeller"}
             ]
@@ -147,21 +147,21 @@ var jsonThing = {
           "children": [
             {"name": "floor 4 help 1",
             "children": [
-              {"name": "NathanHoule​"},
-              {"name": "SherahSmith​"},
+              {"name": "NathanHoule"},
+              {"name": "SherahSmith"},
               {"name": "IanLyons"}
             ]},
             {"name": "floor 4 help 2",
             "children": [
-              {"name": "TimSchiller​"},
-              {"name": "MarkReveley​"},
+              {"name": "TimSchiller"},
+              {"name": "MarkReveley"},
               {"name": "JunJung"}
             ]},
             {"name": "floor 4 help 3",
             "children": [
-              {"name": "MarkRossetti​"},
+              {"name": "MarkRossetti"},
               {"name": "IanLyons"},
-              {"name": "HenryZhu​"}
+              {"name": "HenryZhu"}
 
             ]}
           ]
@@ -184,7 +184,10 @@ var tryMove = function(player, target){
   console.log(target)
   console.log('target x', target.x);
   console.log('target y',target.y);
-  player.attr("transform", "translate(" + target.y + ")");
+  player.transition().duration(1000).attr("transform", function(d){
+    return "rotate(" + (target.x) +") translate(" + target.y + ")";
+  });
+
   return player;
 };
 
@@ -239,3 +242,29 @@ node.append("text")
     .text(function(d) { return d.name; });
 
 d3.select().style("height", diameter - 150 + "px");
+
+
+// make enemies
+
+window.activeRequests = {};
+window.students = (function(){
+  var nodes = d3.selectAll(".node");
+  var students =[];
+  nodes.each( function(obj){
+    if (obj.depth===3){
+      students.push(obj);
+    }
+  });
+  return students;
+})();
+
+
+
+window.submitRequest = function(source){
+  window.activeRequests[source.name] = {
+    timeSent: Date.now(),
+    node: source
+  };
+};
+
+

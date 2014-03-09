@@ -1,3 +1,4 @@
+something = d3.select("g").selectAll(".node").data()[0] // this line rocks yo
 // wiki on the chart we're using
 // https://github.com/mbostock/d3/wiki/SVG-Shapes#wiki-diagonal
 
