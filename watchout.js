@@ -181,9 +181,9 @@ var movePlayerToNode = function(player, target){
 };
 
 var tryMove = function(player, target){
-  console.log(target)
-  console.log('target x', target.x);
-  console.log('target y',target.y);
+  //console.log(target)
+  //console.log('target x', target.x);
+  //console.log('target y',target.y);
   player.transition().duration(1000).attr("transform", function(d){
     return "rotate(" + (target.x) +") translate(" + target.y + ")";
   });
@@ -221,8 +221,8 @@ var node = svg.selectAll(".node")
     .attr("class", "node")
     .attr("transform", function(d) { return "rotate(" + (d.x) + ")translate(" + d.y + ")"; })
     .on("click", function (obj,index){
-      console.log('obj ', obj, 'index ', index, 'dom element ',this);
-      console.log(obj.y);
+      //console.log('obj ', obj, 'index ', index, 'dom element ',this);
+      //console.log(obj.y);
      tryMove(window.player, obj);
 
     });
@@ -258,7 +258,37 @@ window.students = (function(){
   return students;
 })();
 
+window.getLinks = function(nodeName){
+  var result = [];
+  var getLink = function(node){
+    var nextNodeName;
+    d3.selectAll("path").each(function(obj){
+      window.obj = obj;
+      if (obj.target.name === nodeName) {
+        result.push([obj, this]);
+        nextNodeName = obj.source.name;
+      }
+      return nextNodeName;
+    });
 
+  };
+  var node=nodeName;
+  for (var i=0; i<3; i++){
+    node = getLink(node);
+  }
+  return result;
+};
+
+window.getLink = function(nodeName){
+  var result;
+  d3.selectAll("path").each(function(obj){
+    window.obj = obj;
+    if (obj.target.name === nodeName) {
+      result = [obj, this];
+    }
+  });
+  return result;
+};
 
 window.submitRequest = function(source){
   if (window.activeRequests[source.name]===undefined){
@@ -271,7 +301,7 @@ window.submitRequest = function(source){
         return thing;
       }
     });
-    console.log(d3source);
+    //console.log(d3source);
     d3source.classed("circle", false);
     d3source.classed("infected", true);
   }
@@ -285,7 +315,6 @@ window.generateRequest = function(){
 
 window.addSpawner = function(delay){
   setInterval(function(){
-    console.log("hi");
     window.generateRequest();
   }, (delay*d3.random.irwinHall(1)()));
 };
